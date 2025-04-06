@@ -18,7 +18,7 @@ class Property extends Model
     ];
 
     public function recommendations()
-{
-    return $this->hasOne(\App\Models\Recommendation::class);
-}
+    {
+        return $this->hasOne(\App\Models\PropertyRecommendation::class);
+    }
 }

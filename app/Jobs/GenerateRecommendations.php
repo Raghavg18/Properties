@@ -11,10 +11,10 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Http;
 
-class GenerateRecomendation implements ShouldQueue
+class GenerateRecommendations implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    
+
     protected $property;
 
     public function __construct(Property $property)
@@ -34,11 +34,12 @@ class GenerateRecomendation implements ShouldQueue
                     ]
                 ],
             ]);
-            $recommendations = json_decode($response->body(), true);
 
-            PropertyRecommendation::create([
-                'property_id' => $this->property->id,
-                'recommendations' => $recommendations,
-            ]);
+        $recommendationsText = $response['choices'][0]['message']['content'] ?? 'No recommendations available.';
+
+        PropertyRecommendation::create([
+            'property_id' => $this->property->id,
+            'recommendations' => $recommendationsText,
+        ]);
     }
 }
