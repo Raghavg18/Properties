@@ -22,7 +22,7 @@ A Laravel-based web application that helps match properties with potential buyer
 
 1. Clone the repository:
 ```bash
-git clone [repository-url]
+git clone https://github.com/Raghavg18/Properties.git
 cd property-matcher
 ```
 
